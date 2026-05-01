@@ -166,7 +166,10 @@ namespace LibrarySystem
                     b.Id,
                     b.Title,
                     b.Isbn,
+                    b.Authors,
                     b.Status,
+                    b.IsReference,
+                    b.Year,
                     b.Quantity
                 }).ToList();
             }
