@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace LibrarySystem.Models
 {
@@ -7,15 +8,17 @@ namespace LibrarySystem.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Isbn { get; set; }
+        public int Quantity { get; set; }
         public string Status { get; set; }
         public bool IsReference { get; set; }
         public int Year { get; set; }
-        public int Quantity { get; set; }
 
-        // This property is used for Part 1.3 (Concurrency)
+        [Timestamp] // Part 1.3: Concurrency Token
         public byte[] RowVersion { get; set; }
 
-        // Navigation property for Many-to-Many
         public virtual ICollection<Author> Authors { get; set; } = new List<Author>();
+
+        // Part 4.2: Refactoring Challenge - Descriptive property
+        public bool IsProcessable => Status == "Available" && !IsReference && Year > 2000;
     }
 }
