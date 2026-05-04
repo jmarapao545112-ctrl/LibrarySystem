@@ -45,6 +45,10 @@
             label5 = new Label();
             numDaysLate = new NumericUpDown();
             groupBox1 = new GroupBox();
+            label6 = new Label();
+            label3 = new Label();
+            txtCheckoutTitle = new TextBox();
+            txtCheckoutBookId = new TextBox();
             label4 = new Label();
             lvActivityLog = new ListView();
             Timestamp = new ColumnHeader();
@@ -56,10 +60,6 @@
             btnProcessCheckout = new Button();
             label2 = new Label();
             dgvBooks = new DataGridView();
-            button5 = new Button();
-            btnEditSelected = new Button();
-            btnAddBook = new Button();
-            txtSearch = new TextBox();
             ID = new DataGridViewTextBoxColumn();
             Title = new DataGridViewTextBoxColumn();
             ISBN = new DataGridViewTextBoxColumn();
@@ -68,6 +68,10 @@
             IsReference = new DataGridViewTextBoxColumn();
             Year = new DataGridViewTextBoxColumn();
             Quantity = new DataGridViewTextBoxColumn();
+            button5 = new Button();
+            btnEditSelected = new Button();
+            btnAddBook = new Button();
+            txtSearch = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -204,10 +208,10 @@
             groupBox2.Controls.Add(numDaysLate);
             groupBox2.FlatStyle = FlatStyle.Flat;
             groupBox2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox2.Location = new Point(527, 363);
+            groupBox2.Location = new Point(527, 293);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(21, 20, 21, 20);
-            groupBox2.Size = new Size(497, 349);
+            groupBox2.Size = new Size(497, 419);
             groupBox2.TabIndex = 6;
             groupBox2.TabStop = false;
             groupBox2.Text = "LATE FEE CALCULATOR";
@@ -267,6 +271,10 @@
             // groupBox1
             // 
             groupBox1.BackColor = SystemColors.Control;
+            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(txtCheckoutTitle);
+            groupBox1.Controls.Add(txtCheckoutBookId);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(lvActivityLog);
             groupBox1.Controls.Add(txtQuantity);
@@ -275,19 +283,55 @@
             groupBox1.Controls.Add(btnProcessCheckout);
             groupBox1.Controls.Add(label2);
             groupBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox1.Location = new Point(21, 363);
+            groupBox1.Location = new Point(21, 293);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(21, 20, 21, 20);
-            groupBox1.Size = new Size(491, 349);
+            groupBox1.Size = new Size(491, 419);
             groupBox1.TabIndex = 5;
             groupBox1.TabStop = false;
             groupBox1.Text = "BOOK CHECKOUT";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(24, 106);
+            label6.Name = "label6";
+            label6.Size = new Size(41, 20);
+            label6.TabIndex = 11;
+            label6.Text = "Title:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(24, 70);
+            label3.Name = "label3";
+            label3.Size = new Size(27, 20);
+            label3.TabIndex = 10;
+            label3.Text = "ID:";
+            // 
+            // txtCheckoutTitle
+            // 
+            txtCheckoutTitle.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtCheckoutTitle.Location = new Point(71, 101);
+            txtCheckoutTitle.Name = "txtCheckoutTitle";
+            txtCheckoutTitle.Size = new Size(153, 27);
+            txtCheckoutTitle.TabIndex = 9;
+            // 
+            // txtCheckoutBookId
+            // 
+            txtCheckoutBookId.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtCheckoutBookId.Location = new Point(57, 65);
+            txtCheckoutBookId.Name = "txtCheckoutBookId";
+            txtCheckoutBookId.Size = new Size(167, 27);
+            txtCheckoutBookId.TabIndex = 8;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(23, 179);
+            label4.Location = new Point(23, 265);
             label4.Name = "label4";
             label4.Size = new Size(87, 20);
             label4.TabIndex = 7;
@@ -300,9 +344,9 @@
             lvActivityLog.FullRowSelect = true;
             lvActivityLog.GridLines = true;
             lvActivityLog.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            lvActivityLog.Location = new Point(14, 211);
+            lvActivityLog.Location = new Point(12, 288);
             lvActivityLog.Name = "lvActivityLog";
-            lvActivityLog.Size = new Size(462, 121);
+            lvActivityLog.Size = new Size(471, 121);
             lvActivityLog.TabIndex = 6;
             lvActivityLog.UseCompatibleStateImageBehavior = false;
             lvActivityLog.View = View.Details;
@@ -334,7 +378,7 @@
             // 
             lblStatus.AutoSize = true;
             lblStatus.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblStatus.Location = new Point(23, 133);
+            lblStatus.Location = new Point(24, 230);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(49, 20);
             lblStatus.TabIndex = 3;
@@ -342,7 +386,7 @@
             // 
             // prgEmail
             // 
-            prgEmail.Location = new Point(23, 83);
+            prgEmail.Location = new Point(21, 179);
             prgEmail.Name = "prgEmail";
             prgEmail.Size = new Size(427, 29);
             prgEmail.Style = ProgressBarStyle.Continuous;
@@ -388,51 +432,10 @@
             dgvBooks.RowHeadersVisible = false;
             dgvBooks.RowHeadersWidth = 51;
             dgvBooks.RowTemplate.Height = 30;
-            dgvBooks.Size = new Size(1003, 280);
+            dgvBooks.Size = new Size(1003, 231);
             dgvBooks.TabIndex = 4;
-            // 
-            // button5
-            // 
-            button5.BackColor = Color.IndianRed;
-            button5.ForeColor = Color.White;
-            button5.Location = new Point(736, 15);
-            button5.Name = "button5";
-            button5.Size = new Size(129, 29);
-            button5.TabIndex = 3;
-            button5.Text = "Delete Selected";
-            button5.UseVisualStyleBackColor = false;
-            // 
-            // btnEditSelected
-            // 
-            btnEditSelected.BackColor = Color.SeaGreen;
-            btnEditSelected.ForeColor = Color.White;
-            btnEditSelected.Location = new Point(603, 15);
-            btnEditSelected.Name = "btnEditSelected";
-            btnEditSelected.Size = new Size(111, 29);
-            btnEditSelected.TabIndex = 2;
-            btnEditSelected.Text = "Edit Selected";
-            btnEditSelected.UseVisualStyleBackColor = false;
-            // 
-            // btnAddBook
-            // 
-            btnAddBook.BackColor = Color.SteelBlue;
-            btnAddBook.ForeColor = Color.White;
-            btnAddBook.Location = new Point(477, 15);
-            btnAddBook.Name = "btnAddBook";
-            btnAddBook.Size = new Size(105, 29);
-            btnAddBook.TabIndex = 1;
-            btnAddBook.Text = "+ Add Book";
-            btnAddBook.UseVisualStyleBackColor = false;
-            // 
-            // txtSearch
-            // 
-            txtSearch.Location = new Point(19, 15);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(428, 27);
-            txtSearch.TabIndex = 0;
-            txtSearch.Text = "Search by title or ISBN...";
-            txtSearch.Click += txtSearch_Click;
-            txtSearch.TextChanged += txtSearch_TextChanged;
+            dgvBooks.CellClick += dgvBooks_CellClick;
+        
             // 
             // ID
             // 
@@ -497,6 +500,49 @@
             Quantity.MinimumWidth = 6;
             Quantity.Name = "Quantity";
             Quantity.Width = 125;
+            // 
+            // button5
+            // 
+            button5.BackColor = Color.IndianRed;
+            button5.ForeColor = Color.White;
+            button5.Location = new Point(736, 15);
+            button5.Name = "button5";
+            button5.Size = new Size(129, 29);
+            button5.TabIndex = 3;
+            button5.Text = "Delete Selected";
+            button5.UseVisualStyleBackColor = false;
+            // 
+            // btnEditSelected
+            // 
+            btnEditSelected.BackColor = Color.SeaGreen;
+            btnEditSelected.ForeColor = Color.White;
+            btnEditSelected.Location = new Point(603, 15);
+            btnEditSelected.Name = "btnEditSelected";
+            btnEditSelected.Size = new Size(111, 29);
+            btnEditSelected.TabIndex = 2;
+            btnEditSelected.Text = "Edit Selected";
+            btnEditSelected.UseVisualStyleBackColor = false;
+            // 
+            // btnAddBook
+            // 
+            btnAddBook.BackColor = Color.SteelBlue;
+            btnAddBook.ForeColor = Color.White;
+            btnAddBook.Location = new Point(477, 15);
+            btnAddBook.Name = "btnAddBook";
+            btnAddBook.Size = new Size(105, 29);
+            btnAddBook.TabIndex = 1;
+            btnAddBook.Text = "+ Add Book";
+            btnAddBook.UseVisualStyleBackColor = false;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(19, 15);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(428, 27);
+            txtSearch.TabIndex = 0;
+            txtSearch.Text = "Search by title or ISBN...";
+            txtSearch.Click += txtSearch_Click;
+            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // Form1
             // 
@@ -566,5 +612,9 @@
         private DataGridViewTextBoxColumn IsReference;
         private DataGridViewTextBoxColumn Year;
         private DataGridViewTextBoxColumn Quantity;
+        private Label label3;
+        private TextBox txtCheckoutTitle;
+        private TextBox txtCheckoutBookId;
+        private Label label6;
     }
 }

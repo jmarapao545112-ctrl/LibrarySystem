@@ -67,31 +67,36 @@ namespace LibrarySystem
 
         private async void btnProcessCheckout_Click(object sender, EventArgs e)
         {
-            await _semaphore.WaitAsync(); // Part 3.5: Thread Safety
+            // Part 3.5: Thread Safety
+            await _semaphore.WaitAsync();
             try
             {
+                if (string.IsNullOrEmpty(txtCheckoutBookId.Text))
+                {
+                    MessageBox.Show("Please select a book first!");
+                    return;
+                }
+
                 btnProcessCheckout.Enabled = false;
-                lblStatus.Text = "Updating Database...";
+                lblStatus.Text = "Processing Checkout...";
 
-                // 1. Database Logic (Requirement 3.1)
+                // Part 3.1 & 3.2: Database & Email Simulation
                 await Task.Delay(1000);
-
-                // 2. Async Email Simulation (Requirement 3.2 & 3.4)
                 await RunEmailSimulationAsync();
 
-                // 3. Log to file (Requirement 3.3)
-                File.AppendAllText("log.txt", $"{DateTime.Now}: Book 101 Checked Out\n");
+                // Part 3.3: Log to file (REQUIRED)
+                string logEntry = $"{DateTime.Now}: Book {txtCheckoutBookId.Text} Checked Out\n";
+                File.AppendAllText("log.txt", logEntry);
 
-                // 4. Trigger Event (Requirement 3.6)
-                OnBookCheckedOut?.Invoke(this, 101);
+                // Part 3.6: Trigger the Event (REQUIRED)
+                OnBookCheckedOut?.Invoke(this, int.Parse(txtCheckoutBookId.Text));
 
-                UpdateActivityLog("Book 101 Checked Out Successfully");
+                UpdateActivityLog($"Success: {txtCheckoutTitle.Text} is now out.");
                 lblStatus.Text = "Success!";
             }
             catch (Exception ex)
             {
-                lblStatus.Text = "Error occurred.";
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
@@ -178,6 +183,17 @@ namespace LibrarySystem
         private void txtSearch_Click(object sender, EventArgs e)
         {
             txtSearch.Clear();
+        }
+
+        private void dgvBooks_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) // Ensures you didn't click the header row
+            {
+                var row = dgvBooks.Rows[e.RowIndex];
+                // This fills your textboxes so you don't have to type the ID manually
+                txtCheckoutBookId.Text = row.Cells["Id"].Value.ToString();
+                txtCheckoutTitle.Text = row.Cells["Title"].Value.ToString();
+            }
         }
     }
 }
