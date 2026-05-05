@@ -67,8 +67,7 @@ namespace LibrarySystem
 
         private async void btnProcessCheckout_Click(object sender, EventArgs e)
         {
-            // Part 3.5: Thread Safety
-            await _semaphore.WaitAsync();
+            await _semaphore.WaitAsync(); // Part 3.5: Thread Safety
             try
             {
                 if (string.IsNullOrEmpty(txtCheckoutBookId.Text))
@@ -79,20 +78,40 @@ namespace LibrarySystem
 
                 btnProcessCheckout.Enabled = false;
                 lblStatus.Text = "Processing Checkout...";
+                int bookId = int.Parse(txtCheckoutBookId.Text);
 
-                // Part 3.1 & 3.2: Database & Email Simulation
-                await Task.Delay(1000);
-                await RunEmailSimulationAsync();
+                // --- THE MISSING PART: Actually update the database (Part 3.1) ---
+                using (var db = new LibraryContext())
+                {
+                    var book = await db.Books.FindAsync(bookId);
+                    if (book == null || book.Quantity <= 0)
+                    {
+                        lblStatus.Text = "Error: Out of stock!";
+                        return;
+                    }
 
-                // Part 3.3: Log to file (REQUIRED)
-                string logEntry = $"{DateTime.Now}: Book {txtCheckoutBookId.Text} Checked Out\n";
+                    book.Quantity -= 1; // Decrease stock
+                    await db.SaveChangesAsync(); // Save to DB
+                }
+                // ------------------------------------------------------------------
+
+                await RunEmailSimulationAsync(); // Part 3.2 & 3.4
+
+                // Part 3.3: Log to file
+                string logEntry = $"{DateTime.Now}: Book {bookId} Checked Out\n";
                 File.AppendAllText("log.txt", logEntry);
 
-                // Part 3.6: Trigger the Event (REQUIRED)
-                OnBookCheckedOut?.Invoke(this, int.Parse(txtCheckoutBookId.Text));
+                // Part 3.6: Trigger the Event
+                OnBookCheckedOut?.Invoke(this, bookId);
 
-                UpdateActivityLog($"Success: {txtCheckoutTitle.Text} is now out.");
+                UpdateActivityLog($"Success: {txtCheckoutTitle.Text} checked out.");
                 lblStatus.Text = "Success!";
+
+                await RefreshGrid(); // Update the UI to show the new quantity!
+                txtQuantity.Text = (int.Parse(txtQuantity.Text) - 1).ToString();
+                //txtCheckoutBookId.Clear();
+                //txtCheckoutTitle.Clear();
+                //txtQuantity.Clear();
             }
             catch (Exception ex)
             {
@@ -128,12 +147,19 @@ namespace LibrarySystem
         {
             using (var db = new LibraryContext())
             {
+                // --- ADD THESE TWO LINES TO FORCE A RESET ---
+                db.Database.EnsureDeleted();
+                db.Database.EnsureCreated();
+                // --------------------------------------------
+
                 if (!db.Books.Any())
                 {
                     var author = new Author { Name = "C# Expert" };
-                    var book = new Book { Title = "EF Core Guide", Isbn = "123-456", Quantity = 5, Status = "Available", Year = 2024 };
-                    book.Authors.Add(author);
-                    db.Books.Add(book);
+
+                    var book1 = new Book { Title = "EF Core Guide", Isbn = "123-456", Quantity = 20, Status = "Available", Year = 2024 };
+                    book1.Authors.Add(author);
+
+                    db.Books.AddRange(book1);
                     await db.SaveChangesAsync();
                 }
             }
@@ -171,7 +197,7 @@ namespace LibrarySystem
                     b.Id,
                     b.Title,
                     b.Isbn,
-                    b.Authors,
+                    Authors = string.Join(", ", b.Authors.Select(a => a.Name)), // <--- FIX THIS LINE
                     b.Status,
                     b.IsReference,
                     b.Year,
@@ -187,12 +213,62 @@ namespace LibrarySystem
 
         private void dgvBooks_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // Ensures you didn't click the header row
+
+            if (e.RowIndex >= 0)
             {
                 var row = dgvBooks.Rows[e.RowIndex];
-                // This fills your textboxes so you don't have to type the ID manually
                 txtCheckoutBookId.Text = row.Cells["Id"].Value.ToString();
                 txtCheckoutTitle.Text = row.Cells["Title"].Value.ToString();
+
+                // ADD THIS LINE (Make sure the name matches your 3rd textbox):
+                txtQuantity.Text = row.Cells["Quantity"].Value.ToString();
+            }
+        }
+
+        private async void btnAddBook_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var db = new LibraryContext())
+                {
+                    // 1. Create a default author (or you could add a textbox for this too!)
+                    var author = new Author { Name = "Unknown Author" };
+
+                    // 2. Build the new book using the data from your textboxes
+                    var newBook = new Book
+                    {
+                        Title = txtNewTitle.Text,
+                        Isbn = txtNewIsbn.Text,
+                        Year = int.Parse(txtNewYear.Text),
+                        Quantity = int.Parse(txtNewQuantity.Text),
+                        Status = "Available", // Default status
+                        IsReference = false   // Default to false so it shows up in your filtered grid
+                    };
+
+                    // Link the author and the book
+                    newBook.Authors.Add(author);
+
+                    // 3. Add to the EF Core database tracking
+                    db.Books.Add(newBook);
+
+                    // 4. Save changes to the actual SQL database
+                    await db.SaveChangesAsync();
+                }
+
+                // 5. Clear the textboxes so they are empty for the next entry
+                txtNewTitle.Clear();
+                txtNewIsbn.Clear();
+                txtNewYear.Clear();
+                txtNewQuantity.Clear();
+
+                // 6. Refresh the grid so the new book appears instantly!
+                await RefreshGrid();
+
+                MessageBox.Show("Book added successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error adding book. Make sure Year and Quantity are numbers! Details: " + ex.Message);
             }
         }
     }

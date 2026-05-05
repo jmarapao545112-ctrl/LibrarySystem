@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
             label1 = new Label();
             pictureBox1 = new PictureBox();
@@ -38,6 +38,18 @@
             button2 = new Button();
             button1 = new Button();
             panel3 = new Panel();
+            groupBox3 = new GroupBox();
+            label10 = new Label();
+            label9 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            button5 = new Button();
+            txtNewQuantity = new TextBox();
+            btnEditSelected = new Button();
+            txtNewYear = new TextBox();
+            btnAddBook = new Button();
+            txtNewIsbn = new TextBox();
+            txtNewTitle = new TextBox();
             groupBox2 = new GroupBox();
             lblFeeResult = new Label();
             btnCalculateFee = new Button();
@@ -68,14 +80,12 @@
             IsReference = new DataGridViewTextBoxColumn();
             Year = new DataGridViewTextBoxColumn();
             Quantity = new DataGridViewTextBoxColumn();
-            button5 = new Button();
-            btnEditSelected = new Button();
-            btnAddBook = new Button();
             txtSearch = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            groupBox3.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numDaysLate).BeginInit();
             groupBox1.SuspendLayout();
@@ -186,18 +196,146 @@
             // panel3
             // 
             panel3.BackColor = SystemColors.Control;
+            panel3.Controls.Add(groupBox3);
             panel3.Controls.Add(groupBox2);
             panel3.Controls.Add(groupBox1);
             panel3.Controls.Add(dgvBooks);
-            panel3.Controls.Add(button5);
-            panel3.Controls.Add(btnEditSelected);
-            panel3.Controls.Add(btnAddBook);
             panel3.Controls.Add(txtSearch);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(181, 51);
             panel3.Name = "panel3";
             panel3.Size = new Size(1046, 732);
             panel3.TabIndex = 2;
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(label10);
+            groupBox3.Controls.Add(label9);
+            groupBox3.Controls.Add(label8);
+            groupBox3.Controls.Add(label7);
+            groupBox3.Controls.Add(button5);
+            groupBox3.Controls.Add(txtNewQuantity);
+            groupBox3.Controls.Add(btnEditSelected);
+            groupBox3.Controls.Add(txtNewYear);
+            groupBox3.Controls.Add(btnAddBook);
+            groupBox3.Controls.Add(txtNewIsbn);
+            groupBox3.Controls.Add(txtNewTitle);
+            groupBox3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox3.Location = new Point(527, 296);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(497, 221);
+            groupBox3.TabIndex = 7;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "ADD NEW BOOK";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Location = new Point(39, 157);
+            label10.Name = "label10";
+            label10.Size = new Size(68, 20);
+            label10.TabIndex = 7;
+            label10.Text = "Quantity:";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(39, 121);
+            label9.Name = "label9";
+            label9.Size = new Size(40, 20);
+            label9.TabIndex = 6;
+            label9.Text = "Year:";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(39, 85);
+            label8.Name = "label8";
+            label8.Size = new Size(44, 20);
+            label8.TabIndex = 5;
+            label8.Text = "ISBN:";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(39, 51);
+            label7.Name = "label7";
+            label7.Size = new Size(41, 20);
+            label7.TabIndex = 4;
+            label7.Text = "Title:";
+            // 
+            // button5
+            // 
+            button5.BackColor = Color.IndianRed;
+            button5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button5.ForeColor = Color.White;
+            button5.Location = new Point(338, 121);
+            button5.Name = "button5";
+            button5.Size = new Size(129, 29);
+            button5.TabIndex = 3;
+            button5.Text = "Delete Selected";
+            button5.UseVisualStyleBackColor = false;
+            // 
+            // txtNewQuantity
+            // 
+            txtNewQuantity.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNewQuantity.Location = new Point(120, 152);
+            txtNewQuantity.Name = "txtNewQuantity";
+            txtNewQuantity.Size = new Size(177, 27);
+            txtNewQuantity.TabIndex = 3;
+            // 
+            // btnEditSelected
+            // 
+            btnEditSelected.BackColor = Color.SeaGreen;
+            btnEditSelected.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnEditSelected.ForeColor = Color.White;
+            btnEditSelected.Location = new Point(356, 80);
+            btnEditSelected.Name = "btnEditSelected";
+            btnEditSelected.Size = new Size(111, 29);
+            btnEditSelected.TabIndex = 2;
+            btnEditSelected.Text = "Edit Selected";
+            btnEditSelected.UseVisualStyleBackColor = false;
+            // 
+            // txtNewYear
+            // 
+            txtNewYear.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNewYear.Location = new Point(120, 116);
+            txtNewYear.Name = "txtNewYear";
+            txtNewYear.Size = new Size(177, 27);
+            txtNewYear.TabIndex = 2;
+            // 
+            // btnAddBook
+            // 
+            btnAddBook.BackColor = Color.SteelBlue;
+            btnAddBook.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAddBook.ForeColor = Color.White;
+            btnAddBook.Location = new Point(362, 42);
+            btnAddBook.Name = "btnAddBook";
+            btnAddBook.Size = new Size(105, 29);
+            btnAddBook.TabIndex = 1;
+            btnAddBook.Text = "+ Add Book";
+            btnAddBook.UseVisualStyleBackColor = false;
+            btnAddBook.Click += btnAddBook_Click;
+            // 
+            // txtNewIsbn
+            // 
+            txtNewIsbn.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNewIsbn.Location = new Point(120, 80);
+            txtNewIsbn.Name = "txtNewIsbn";
+            txtNewIsbn.Size = new Size(177, 27);
+            txtNewIsbn.TabIndex = 1;
+            // 
+            // txtNewTitle
+            // 
+            txtNewTitle.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNewTitle.Location = new Point(120, 44);
+            txtNewTitle.Name = "txtNewTitle";
+            txtNewTitle.Size = new Size(177, 27);
+            txtNewTitle.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -208,10 +346,10 @@
             groupBox2.Controls.Add(numDaysLate);
             groupBox2.FlatStyle = FlatStyle.Flat;
             groupBox2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox2.Location = new Point(527, 293);
+            groupBox2.Location = new Point(527, 523);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(21, 20, 21, 20);
-            groupBox2.Size = new Size(497, 419);
+            groupBox2.Size = new Size(497, 189);
             groupBox2.TabIndex = 6;
             groupBox2.TabStop = false;
             groupBox2.Text = "LATE FEE CALCULATOR";
@@ -220,7 +358,7 @@
             // 
             lblFeeResult.BorderStyle = BorderStyle.FixedSingle;
             lblFeeResult.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblFeeResult.Location = new Point(23, 179);
+            lblFeeResult.Location = new Point(22, 149);
             lblFeeResult.Name = "lblFeeResult";
             lblFeeResult.Size = new Size(290, 25);
             lblFeeResult.TabIndex = 4;
@@ -231,7 +369,7 @@
             btnCalculateFee.BackColor = Color.SteelBlue;
             btnCalculateFee.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnCalculateFee.ForeColor = Color.White;
-            btnCalculateFee.Location = new Point(282, 108);
+            btnCalculateFee.Location = new Point(282, 100);
             btnCalculateFee.Name = "btnCalculateFee";
             btnCalculateFee.Size = new Size(112, 29);
             btnCalculateFee.TabIndex = 3;
@@ -371,6 +509,7 @@
             txtQuantity.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtQuantity.Location = new Point(146, 32);
             txtQuantity.Name = "txtQuantity";
+            txtQuantity.ReadOnly = true;
             txtQuantity.Size = new Size(78, 27);
             txtQuantity.TabIndex = 4;
             // 
@@ -417,14 +556,14 @@
             // 
             // dgvBooks
             // 
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvBooks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvBooks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvBooks.ColumnHeadersHeight = 30;
             dgvBooks.Columns.AddRange(new DataGridViewColumn[] { ID, Title, ISBN, Author, Status, IsReference, Year, Quantity });
             dgvBooks.Location = new Point(21, 56);
@@ -435,7 +574,6 @@
             dgvBooks.Size = new Size(1003, 231);
             dgvBooks.TabIndex = 4;
             dgvBooks.CellClick += dgvBooks_CellClick;
-        
             // 
             // ID
             // 
@@ -501,39 +639,6 @@
             Quantity.Name = "Quantity";
             Quantity.Width = 125;
             // 
-            // button5
-            // 
-            button5.BackColor = Color.IndianRed;
-            button5.ForeColor = Color.White;
-            button5.Location = new Point(736, 15);
-            button5.Name = "button5";
-            button5.Size = new Size(129, 29);
-            button5.TabIndex = 3;
-            button5.Text = "Delete Selected";
-            button5.UseVisualStyleBackColor = false;
-            // 
-            // btnEditSelected
-            // 
-            btnEditSelected.BackColor = Color.SeaGreen;
-            btnEditSelected.ForeColor = Color.White;
-            btnEditSelected.Location = new Point(603, 15);
-            btnEditSelected.Name = "btnEditSelected";
-            btnEditSelected.Size = new Size(111, 29);
-            btnEditSelected.TabIndex = 2;
-            btnEditSelected.Text = "Edit Selected";
-            btnEditSelected.UseVisualStyleBackColor = false;
-            // 
-            // btnAddBook
-            // 
-            btnAddBook.BackColor = Color.SteelBlue;
-            btnAddBook.ForeColor = Color.White;
-            btnAddBook.Location = new Point(477, 15);
-            btnAddBook.Name = "btnAddBook";
-            btnAddBook.Size = new Size(105, 29);
-            btnAddBook.TabIndex = 1;
-            btnAddBook.Text = "+ Add Book";
-            btnAddBook.UseVisualStyleBackColor = false;
-            // 
             // txtSearch
             // 
             txtSearch.Location = new Point(19, 15);
@@ -554,6 +659,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Library Management System";
             Load += Form1_Load;
             panel1.ResumeLayout(false);
@@ -562,6 +668,8 @@
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numDaysLate).EndInit();
@@ -616,5 +724,14 @@
         private TextBox txtCheckoutTitle;
         private TextBox txtCheckoutBookId;
         private Label label6;
+        private GroupBox groupBox3;
+        private TextBox txtNewTitle;
+        private TextBox txtNewIsbn;
+        private Label label10;
+        private Label label9;
+        private Label label8;
+        private Label label7;
+        private TextBox txtNewQuantity;
+        private TextBox txtNewYear;
     }
 }

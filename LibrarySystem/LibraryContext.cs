@@ -13,17 +13,17 @@ public class LibraryContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Part 1.1: Fluent API Many-to-Many
+        // Part 1.1: Establishment of Many-to-Many between Book and Author
         modelBuilder.Entity<Book>()
             .HasMany(b => b.Authors)
             .WithMany(a => a.Books);
 
-        // Part 1.3: Concurrency Token
+        // Part 1.3: Concurrency Token (RowVersion)
         modelBuilder.Entity<Book>()
             .Property(b => b.RowVersion)
             .IsRowVersion();
 
-        // Unique Constraint
+        // Ensure ISBN is unique (Requirement 1.0)
         modelBuilder.Entity<Book>()
             .HasIndex(b => b.Isbn)
             .IsUnique();
