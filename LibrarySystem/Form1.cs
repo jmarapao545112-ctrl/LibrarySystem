@@ -187,7 +187,7 @@ namespace LibrarySystem
 
             // We only search if the user has typed 3 or more letters, 
             // or if they cleared the box (to show all books again).
-            if (term.Length > 2 || term.Length == 0)
+            if (term.Length > 0 || term.Length == 0)
             {
                 var results = await _repo.SearchBooksAsync(term);
 
