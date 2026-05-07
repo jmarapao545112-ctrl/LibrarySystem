@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Xml.Linq;
 
 namespace LibrarySystem
 {
@@ -232,7 +233,7 @@ namespace LibrarySystem
                 using (var db = new LibraryContext())
                 {
                     // 1. Create a default author (or you could add a textbox for this too!)
-                    var author = new Author { Name = "Unknown Author" };
+                    //var author = new Author { Name = "Unknown Author" };
 
                     // 2. Build the new book using the data from your textboxes
                     var newBook = new Book
@@ -245,8 +246,25 @@ namespace LibrarySystem
                         IsReference = false   // Default to false so it shows up in your filtered grid
                     };
 
-                    // Link the author and the book
-                    newBook.Authors.Add(author);
+                    // 2. Handle the Author
+                    string authorName = txtNewAuthor.Text.Trim();
+                    if (!string.IsNullOrEmpty(authorName))
+                    {
+                        // Check if this author already exists in the database to avoid duplicates
+                        var existingAuthor = db.Authors.FirstOrDefault(a => a.Name == authorName);
+
+                        if (existingAuthor != null)
+                        {
+                            // If they exist, link the existing one
+                            newBook.Authors.Add(existingAuthor);
+                        }
+                        else
+                        {
+                            // If they are brand new, create them
+                            var newAuthor = new Author { Name = authorName };
+                            newBook.Authors.Add(newAuthor);
+                        }
+                    }
 
                     // 3. Add to the EF Core database tracking
                     db.Books.Add(newBook);
@@ -260,6 +278,7 @@ namespace LibrarySystem
                 txtNewIsbn.Clear();
                 txtNewYear.Clear();
                 txtNewQuantity.Clear();
+                txtNewAuthor.Clear();
 
                 // 6. Refresh the grid so the new book appears instantly!
                 await RefreshGrid();
