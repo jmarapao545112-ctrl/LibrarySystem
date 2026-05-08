@@ -13,12 +13,11 @@ namespace LibrarySystem.Models
         public bool IsReference { get; set; }
         public int Year { get; set; }
 
-        [Timestamp] // Part 1.3: Concurrency Token
+        [Timestamp] 
         public byte[] RowVersion { get; set; }
 
         public virtual ICollection<Author> Authors { get; set; } = new List<Author>();
 
-        // Part 4.2: Refactoring Challenge - Descriptive property
         public bool IsProcessable => Status == "Available" && !IsReference && Year > 2000;
     }
 }

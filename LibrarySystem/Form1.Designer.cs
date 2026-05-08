@@ -34,6 +34,8 @@
             pictureBox1 = new PictureBox();
             panel3 = new Panel();
             groupBox3 = new GroupBox();
+            label11 = new Label();
+            txtNewAuthor = new TextBox();
             label10 = new Label();
             label9 = new Label();
             label8 = new Label();
@@ -74,8 +76,6 @@
             Year = new DataGridViewTextBoxColumn();
             Quantity = new DataGridViewTextBoxColumn();
             txtSearch = new TextBox();
-            txtNewAuthor = new TextBox();
-            label11 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel3.SuspendLayout();
@@ -88,14 +88,14 @@
             // 
             // panel1
             // 
-            panel1.BackColor = SystemColors.Control;
+            panel1.BackColor = Color.LightSlateGray;
             panel1.Controls.Add(label1);
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(916, 38);
+            panel1.Size = new Size(1039, 38);
             panel1.TabIndex = 0;
             // 
             // label1
@@ -122,7 +122,7 @@
             // 
             // panel3
             // 
-            panel3.BackColor = SystemColors.Control;
+            panel3.BackColor = Color.SlateGray;
             panel3.Controls.Add(groupBox3);
             panel3.Controls.Add(groupBox2);
             panel3.Controls.Add(groupBox1);
@@ -132,11 +132,12 @@
             panel3.Location = new Point(0, 38);
             panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(916, 524);
+            panel3.Size = new Size(1039, 548);
             panel3.TabIndex = 2;
             // 
             // groupBox3
             // 
+            groupBox3.BackColor = Color.LightSteelBlue;
             groupBox3.Controls.Add(label11);
             groupBox3.Controls.Add(txtNewAuthor);
             groupBox3.Controls.Add(label10);
@@ -149,14 +150,33 @@
             groupBox3.Controls.Add(txtNewIsbn);
             groupBox3.Controls.Add(txtNewTitle);
             groupBox3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox3.Location = new Point(461, 222);
+            groupBox3.Location = new Point(534, 222);
             groupBox3.Margin = new Padding(3, 2, 3, 2);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(3, 2, 3, 2);
-            groupBox3.Size = new Size(435, 166);
+            groupBox3.Size = new Size(487, 166);
             groupBox3.TabIndex = 7;
             groupBox3.TabStop = false;
             groupBox3.Text = "ADD NEW BOOK";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label11.Location = new Point(295, 38);
+            label11.Name = "label11";
+            label11.Size = new Size(47, 15);
+            label11.TabIndex = 9;
+            label11.Text = "Author:";
+            // 
+            // txtNewAuthor
+            // 
+            txtNewAuthor.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNewAuthor.Location = new Point(295, 60);
+            txtNewAuthor.Margin = new Padding(3, 2, 3, 2);
+            txtNewAuthor.Name = "txtNewAuthor";
+            txtNewAuthor.Size = new Size(155, 23);
+            txtNewAuthor.TabIndex = 8;
             // 
             // label10
             // 
@@ -194,7 +214,7 @@
             label7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.Location = new Point(34, 38);
             label7.Name = "label7";
-            label7.Size = new Size(32, 15);
+            label7.Size = new Size(33, 15);
             label7.TabIndex = 4;
             label7.Text = "Title:";
             // 
@@ -221,7 +241,7 @@
             btnAddBook.BackColor = Color.SteelBlue;
             btnAddBook.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnAddBook.ForeColor = Color.White;
-            btnAddBook.Location = new Point(295, 87);
+            btnAddBook.Location = new Point(317, 87);
             btnAddBook.Margin = new Padding(3, 2, 3, 2);
             btnAddBook.Name = "btnAddBook";
             btnAddBook.Size = new Size(109, 30);
@@ -250,6 +270,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.BackColor = Color.LightSteelBlue;
             groupBox2.Controls.Add(lblFeeResult);
             groupBox2.Controls.Add(btnCalculateFee);
             groupBox2.Controls.Add(cmbMemberType);
@@ -257,22 +278,23 @@
             groupBox2.Controls.Add(numDaysLate);
             groupBox2.FlatStyle = FlatStyle.Flat;
             groupBox2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox2.Location = new Point(461, 392);
+            groupBox2.Location = new Point(534, 392);
             groupBox2.Margin = new Padding(3, 2, 3, 2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(18, 15, 18, 15);
-            groupBox2.Size = new Size(435, 142);
+            groupBox2.Size = new Size(488, 142);
             groupBox2.TabIndex = 6;
             groupBox2.TabStop = false;
             groupBox2.Text = "LATE FEE CALCULATOR";
             // 
             // lblFeeResult
             // 
+            lblFeeResult.BackColor = Color.AliceBlue;
             lblFeeResult.BorderStyle = BorderStyle.FixedSingle;
             lblFeeResult.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblFeeResult.Location = new Point(19, 112);
+            lblFeeResult.Location = new Point(19, 83);
             lblFeeResult.Name = "lblFeeResult";
-            lblFeeResult.Size = new Size(254, 19);
+            lblFeeResult.Size = new Size(241, 32);
             lblFeeResult.TabIndex = 4;
             lblFeeResult.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -281,7 +303,7 @@
             btnCalculateFee.BackColor = Color.SteelBlue;
             btnCalculateFee.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnCalculateFee.ForeColor = Color.White;
-            btnCalculateFee.Location = new Point(247, 71);
+            btnCalculateFee.Location = new Point(295, 72);
             btnCalculateFee.Margin = new Padding(3, 2, 3, 2);
             btnCalculateFee.Name = "btnCalculateFee";
             btnCalculateFee.Size = new Size(101, 30);
@@ -296,7 +318,7 @@
             cmbMemberType.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbMemberType.FormattingEnabled = true;
             cmbMemberType.Items.AddRange(new object[] { "Student", "Faculty", "Guest" });
-            cmbMemberType.Location = new Point(247, 38);
+            cmbMemberType.Location = new Point(295, 36);
             cmbMemberType.Margin = new Padding(3, 2, 3, 2);
             cmbMemberType.Name = "cmbMemberType";
             cmbMemberType.Size = new Size(157, 23);
@@ -323,7 +345,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.BackColor = SystemColors.Control;
+            groupBox1.BackColor = Color.LightSteelBlue;
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(txtCheckoutTitle);
@@ -336,11 +358,11 @@
             groupBox1.Controls.Add(btnProcessCheckout);
             groupBox1.Controls.Add(label2);
             groupBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox1.Location = new Point(18, 220);
+            groupBox1.Location = new Point(18, 222);
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(18, 15, 18, 15);
-            groupBox1.Size = new Size(430, 314);
+            groupBox1.Size = new Size(494, 314);
             groupBox1.TabIndex = 5;
             groupBox1.TabStop = false;
             groupBox1.Text = "BOOK CHECKOUT";
@@ -349,9 +371,9 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(21, 80);
+            label6.Location = new Point(38, 80);
             label6.Name = "label6";
-            label6.Size = new Size(32, 15);
+            label6.Size = new Size(33, 15);
             label6.TabIndex = 11;
             label6.Text = "Title:";
             // 
@@ -359,7 +381,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(21, 52);
+            label3.Location = new Point(38, 53);
             label3.Name = "label3";
             label3.Size = new Size(21, 15);
             label3.TabIndex = 10;
@@ -368,26 +390,26 @@
             // txtCheckoutTitle
             // 
             txtCheckoutTitle.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtCheckoutTitle.Location = new Point(62, 76);
+            txtCheckoutTitle.Location = new Point(89, 77);
             txtCheckoutTitle.Margin = new Padding(3, 2, 3, 2);
             txtCheckoutTitle.Name = "txtCheckoutTitle";
-            txtCheckoutTitle.Size = new Size(134, 23);
+            txtCheckoutTitle.Size = new Size(154, 23);
             txtCheckoutTitle.TabIndex = 9;
             // 
             // txtCheckoutBookId
             // 
             txtCheckoutBookId.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtCheckoutBookId.Location = new Point(50, 49);
+            txtCheckoutBookId.Location = new Point(89, 50);
             txtCheckoutBookId.Margin = new Padding(3, 2, 3, 2);
             txtCheckoutBookId.Name = "txtCheckoutBookId";
-            txtCheckoutBookId.Size = new Size(147, 23);
+            txtCheckoutBookId.Size = new Size(154, 23);
             txtCheckoutBookId.TabIndex = 8;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(20, 199);
+            label4.Location = new Point(38, 182);
             label4.Name = "label4";
             label4.Size = new Size(70, 15);
             label4.TabIndex = 7;
@@ -400,10 +422,10 @@
             lvActivityLog.FullRowSelect = true;
             lvActivityLog.GridLines = true;
             lvActivityLog.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            lvActivityLog.Location = new Point(18, 216);
+            lvActivityLog.Location = new Point(38, 208);
             lvActivityLog.Margin = new Padding(3, 2, 3, 2);
             lvActivityLog.Name = "lvActivityLog";
-            lvActivityLog.Size = new Size(399, 92);
+            lvActivityLog.Size = new Size(411, 92);
             lvActivityLog.TabIndex = 6;
             lvActivityLog.UseCompatibleStateImageBehavior = false;
             lvActivityLog.View = View.Details;
@@ -426,18 +448,18 @@
             // txtQuantity
             // 
             txtQuantity.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtQuantity.Location = new Point(128, 24);
+            txtQuantity.Location = new Point(155, 24);
             txtQuantity.Margin = new Padding(3, 2, 3, 2);
             txtQuantity.Name = "txtQuantity";
             txtQuantity.ReadOnly = true;
-            txtQuantity.Size = new Size(69, 23);
+            txtQuantity.Size = new Size(88, 23);
             txtQuantity.TabIndex = 4;
             // 
             // lblStatus
             // 
             lblStatus.AutoSize = true;
             lblStatus.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblStatus.Location = new Point(21, 172);
+            lblStatus.Location = new Point(69, 151);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(39, 15);
             lblStatus.TabIndex = 3;
@@ -445,10 +467,10 @@
             // 
             // prgEmail
             // 
-            prgEmail.Location = new Point(18, 134);
+            prgEmail.Location = new Point(70, 118);
             prgEmail.Margin = new Padding(3, 2, 3, 2);
             prgEmail.Name = "prgEmail";
-            prgEmail.Size = new Size(374, 22);
+            prgEmail.Size = new Size(350, 25);
             prgEmail.Style = ProgressBarStyle.Continuous;
             prgEmail.TabIndex = 2;
             // 
@@ -457,7 +479,7 @@
             btnProcessCheckout.BackColor = Color.SteelBlue;
             btnProcessCheckout.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnProcessCheckout.ForeColor = Color.White;
-            btnProcessCheckout.Location = new Point(263, 25);
+            btnProcessCheckout.Location = new Point(318, 30);
             btnProcessCheckout.Margin = new Padding(3, 2, 3, 2);
             btnProcessCheckout.Name = "btnProcessCheckout";
             btnProcessCheckout.Size = new Size(131, 30);
@@ -470,7 +492,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(18, 28);
+            label2.Location = new Point(38, 27);
             label2.Name = "label2";
             label2.Size = new Size(99, 15);
             label2.TabIndex = 0;
@@ -494,7 +516,7 @@
             dgvBooks.RowHeadersVisible = false;
             dgvBooks.RowHeadersWidth = 51;
             dgvBooks.RowTemplate.Height = 30;
-            dgvBooks.Size = new Size(878, 173);
+            dgvBooks.Size = new Size(1003, 173);
             dgvBooks.TabIndex = 4;
             dgvBooks.CellClick += dgvBooks_CellClick;
             // 
@@ -573,31 +595,12 @@
             txtSearch.Click += txtSearch_Click;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
-            // txtNewAuthor
-            // 
-            txtNewAuthor.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtNewAuthor.Location = new Point(274, 60);
-            txtNewAuthor.Margin = new Padding(3, 2, 3, 2);
-            txtNewAuthor.Name = "txtNewAuthor";
-            txtNewAuthor.Size = new Size(155, 23);
-            txtNewAuthor.TabIndex = 8;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(274, 38);
-            label11.Name = "label11";
-            label11.Size = new Size(47, 15);
-            label11.TabIndex = 9;
-            label11.Text = "Author:";
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(916, 562);
+            ClientSize = new Size(1039, 586);
             Controls.Add(panel3);
             Controls.Add(panel1);
             Margin = new Padding(3, 2, 3, 2);

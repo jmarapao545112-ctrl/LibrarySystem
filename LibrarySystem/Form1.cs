@@ -10,23 +10,20 @@ using System.Xml.Linq;
 
 namespace LibrarySystem
 {
-    // Part 3.6: Delegate definition
     public delegate void CheckoutEventHandler(object sender, int bookId);
 
     public partial class Form1 : Form
     {
         private BookRepository _repo = new BookRepository();
 
-        // Part 3.5: Thread Safety lock
         private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
-        // Part 3.6: Event definition
         public event CheckoutEventHandler OnBookCheckedOut;
 
         public Form1()
         {
             InitializeComponent();
-            // Subscribe to event (Requirement 6)
+            
             this.OnBookCheckedOut += (s, id) =>
             {
                 Console.WriteLine($"NotificationService: Book {id} has been processed.");
@@ -35,12 +32,11 @@ namespace LibrarySystem
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            // Setup UI defaults
+            
             cmbMemberType.Items.Clear();
             cmbMemberType.Items.AddRange(new string[] { "Student", "Faculty", "Guest" });
             cmbMemberType.SelectedIndex = 0;
 
-            // Fixes "0 references" by actually calling the methods
             await SeedData();
             await RefreshGrid();
         }
@@ -49,7 +45,6 @@ namespace LibrarySystem
         {
             var books = await _repo.GetAllBooksAsync();
 
-            // Part 4.2: Using a LINQ "Where" clause to clean up the logic
             var displayList = books.Where(b => b.Status == "Available" && !b.IsReference && b.Year > 2000)
             .Select(b => new
             {
@@ -68,7 +63,7 @@ namespace LibrarySystem
 
         private async void btnProcessCheckout_Click(object sender, EventArgs e)
         {
-            await _semaphore.WaitAsync(); // Part 3.5: Thread Safety
+            await _semaphore.WaitAsync(); 
             try
             {
                 if (string.IsNullOrEmpty(txtCheckoutBookId.Text))
@@ -81,7 +76,6 @@ namespace LibrarySystem
                 lblStatus.Text = "Processing Checkout...";
                 int bookId = int.Parse(txtCheckoutBookId.Text);
 
-                // --- THE MISSING PART: Actually update the database (Part 3.1) ---
                 using (var db = new LibraryContext())
                 {
                     var book = await db.Books.FindAsync(bookId);
@@ -91,28 +85,22 @@ namespace LibrarySystem
                         return;
                     }
 
-                    book.Quantity -= 1; // Decrease stock
-                    await db.SaveChangesAsync(); // Save to DB
+                    book.Quantity -= 1; 
+                    await db.SaveChangesAsync(); 
                 }
-                // ------------------------------------------------------------------
+              
+                await RunEmailSimulationAsync();
 
-                await RunEmailSimulationAsync(); // Part 3.2 & 3.4
-
-                // Part 3.3: Log to file
                 string logEntry = $"{DateTime.Now}: Book {bookId} Checked Out\n";
                 File.AppendAllText("log.txt", logEntry);
 
-                // Part 3.6: Trigger the Event
                 OnBookCheckedOut?.Invoke(this, bookId);
 
                 UpdateActivityLog($"Success: {txtCheckoutTitle.Text} checked out.");
                 lblStatus.Text = "Success!";
 
-                await RefreshGrid(); // Update the UI to show the new quantity!
+                await RefreshGrid();
                 txtQuantity.Text = (int.Parse(txtQuantity.Text) - 1).ToString();
-                //txtCheckoutBookId.Clear();
-                //txtCheckoutTitle.Clear();
-                //txtQuantity.Clear();
             }
             catch (Exception ex)
             {
@@ -131,7 +119,7 @@ namespace LibrarySystem
             prgEmail.Value = 0;
             for (int i = 0; i <= 100; i += 20)
             {
-                await Task.Delay(600); // Total ~3 seconds
+                await Task.Delay(600); 
                 prgEmail.Value = i;
             }
         }
@@ -148,11 +136,9 @@ namespace LibrarySystem
         {
             using (var db = new LibraryContext())
             {
-                // --- ADD THESE TWO LINES TO FORCE A RESET ---
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
-                // --------------------------------------------
-
+               
                 if (!db.Books.Any())
                 {
                     var author = new Author { Name = "C# Expert" };
@@ -186,19 +172,16 @@ namespace LibrarySystem
         {
             string term = txtSearch.Text;
 
-            // We only search if the user has typed 3 or more letters, 
-            // or if they cleared the box (to show all books again).
             if (term.Length > 0 || term.Length == 0)
             {
                 var results = await _repo.SearchBooksAsync(term);
 
-                // Use the same logic as RefreshGrid to display the results
                 dgvBooks.DataSource = results.Where(b => b.IsProcessable).Select(b => new
                 {
                     b.Id,
                     b.Title,
                     b.Isbn,
-                    Authors = string.Join(", ", b.Authors.Select(a => a.Name)), // <--- FIX THIS LINE
+                    Authors = string.Join(", ", b.Authors.Select(a => a.Name)),
                     b.Status,
                     b.IsReference,
                     b.Year,
@@ -221,7 +204,6 @@ namespace LibrarySystem
                 txtCheckoutBookId.Text = row.Cells["Id"].Value.ToString();
                 txtCheckoutTitle.Text = row.Cells["Title"].Value.ToString();
 
-                // ADD THIS LINE (Make sure the name matches your 3rd textbox):
                 txtQuantity.Text = row.Cells["Quantity"].Value.ToString();
             }
         }
@@ -232,55 +214,42 @@ namespace LibrarySystem
             {
                 using (var db = new LibraryContext())
                 {
-                    // 1. Create a default author (or you could add a textbox for this too!)
-                    //var author = new Author { Name = "Unknown Author" };
-
-                    // 2. Build the new book using the data from your textboxes
                     var newBook = new Book
                     {
                         Title = txtNewTitle.Text,
                         Isbn = txtNewIsbn.Text,
                         Year = int.Parse(txtNewYear.Text),
                         Quantity = int.Parse(txtNewQuantity.Text),
-                        Status = "Available", // Default status
-                        IsReference = false   // Default to false so it shows up in your filtered grid
+                        Status = "Available", 
+                        IsReference = false   
                     };
 
-                    // 2. Handle the Author
                     string authorName = txtNewAuthor.Text.Trim();
                     if (!string.IsNullOrEmpty(authorName))
                     {
-                        // Check if this author already exists in the database to avoid duplicates
                         var existingAuthor = db.Authors.FirstOrDefault(a => a.Name == authorName);
 
                         if (existingAuthor != null)
                         {
-                            // If they exist, link the existing one
                             newBook.Authors.Add(existingAuthor);
                         }
                         else
                         {
-                            // If they are brand new, create them
                             var newAuthor = new Author { Name = authorName };
                             newBook.Authors.Add(newAuthor);
                         }
                     }
 
-                    // 3. Add to the EF Core database tracking
                     db.Books.Add(newBook);
-
-                    // 4. Save changes to the actual SQL database
                     await db.SaveChangesAsync();
                 }
 
-                // 5. Clear the textboxes so they are empty for the next entry
                 txtNewTitle.Clear();
                 txtNewIsbn.Clear();
                 txtNewYear.Clear();
                 txtNewQuantity.Clear();
                 txtNewAuthor.Clear();
 
-                // 6. Refresh the grid so the new book appears instantly!
                 await RefreshGrid();
 
                 MessageBox.Show("Book added successfully!");
@@ -290,5 +259,6 @@ namespace LibrarySystem
                 MessageBox.Show("Error adding book. Make sure Year and Quantity are numbers! Details: " + ex.Message);
             }
         }
+
     }
 }

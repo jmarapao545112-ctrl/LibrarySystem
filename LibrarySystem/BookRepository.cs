@@ -5,10 +5,8 @@ public class BookRepository
 {
     private readonly LibraryContext _context = new LibraryContext();
 
-    // Part 1.2: Eager Loading implementation
     public async Task<List<Book>> GetAllBooksAsync()
     {
-        // By creating a new context here, it forces EF Core to pull fresh data from SQL!
         using (var context = new LibraryContext())
         {
             return await context.Books
@@ -32,7 +30,6 @@ public class BookRepository
     {
         using (var context = new LibraryContext())
         {
-            // Part 1.2: Eager Loading using .Include
             return await context.Books
                 .Include(b => b.Authors)
                 .Where(b => b.Authors.Any(a => a.Id == authorId))
